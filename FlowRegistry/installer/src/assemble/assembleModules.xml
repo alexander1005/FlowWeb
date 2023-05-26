@@ -1,0 +1,64 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>assembleSubModuleOutputs</id>
+
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <!-- 依赖单独打包-->
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+            <excludes>
+                <exclude>org.apache.flink:*:jar:*</exclude>
+                <exclude>org.apache.calcite:*:jar:*</exclude>
+                <exclude>org.apache.hadoop:*:jar:*</exclude>
+                <exclude>com.typesafe.akka:*:jar:*</exclude>
+                <exclude>com.boraydata.rapidslambda:*:jar:*</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>start*.sh</include>
+                <include>stop*.sh</include>
+                <include>init*.sh</include>
+                <include>config.sh</include>
+                <include>registry_template.properties</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/cfg</outputDirectory>
+            <includes>
+                <include>log4j2*.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>installer/src/main/jars</directory>
+            <outputDirectory>/install</outputDirectory>
+            <includes>
+                <include>installation-shaded.jar</include>
+            </includes>
+        </fileSet>
+        <!-- 需要包含自身 -->
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>${project.artifactId}-${project.version}*.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

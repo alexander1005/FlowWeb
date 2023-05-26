@@ -1,0 +1,45 @@
+server:
+  port: 18081
+  connection-timeout: 18000000
+  servlet:
+    session:
+      timeout: 60
+    context-path: /api
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 20971520000
+      max-request-size: 209715200
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    dbcp2:
+      validation-query: 'select 1'
+      test-on-borrow: true
+    url: jdbc:mysql://192.168.80.72:3306/fabricflow?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: flowv3
+    password: Data2fabric@flow
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: mysql
+security:
+  mvc-ignored:
+    get: /sms/send/**,/file/**
+    post: /
+    all: /login,/v2/api-docs,/configuration/ui,/swagger-resources,/configuration/security,/swagger-ui.html,/webjars/**,/swagger-resources/configuration/ui,/swagge‌​r-ui.html
+    redirect-login-url: /login
+  auth-server: http://192.168.10.11:3002
+quartz:
+  enabled: true
+properties:
+#  file: /tmp/flowstudio-server.properties
+  file: /Users/suzhiqi/Work/boray/FlowPlatform/FlowStudio/src/main/resources/flowstudio-server.properties
+  other-nodes: 192.168.80.70:18081

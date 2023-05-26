@@ -1,0 +1,1 @@
+{"data": [{"Name": "a", "SqlType": "varchar(50)"}, {"Name": "b", "SqlType": "int"}, {"Name": "c", "SqlType": "double"}], "def": {"Delimiter": ",", "Terminator": "\n", "Enclosed": "\"", "Escape": "\\"}}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" monitorInterval="60">
+
+    <Properties>
+        <Property name="rootLoggingLevel">info</Property>
+        <Property name="filename">${sys:Log4jOutputPath}/flowstudio.log</Property>
+        <Property name="consolePattern">%d{ISO8601} %style{%marker}{red} [%-22c{2}] %t %-5p: %m%n</Property>
+        <Property name="filePattern"   >%d{ISO8601} %style{%marker}{red} [%-22c{2}] %t %-5p: %m%n</Property>
+        <Property name="rollingFilePattern">${sys:Log4jOutputPath}/flowstudio-%i.log</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Log to the console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consolePattern}"/>
+        </Console>
+
+        <RollingFile name="RegistryLogFile" fileName="${filename}"
+                filePattern="${rollingFilePattern}" append="true">
+            <PatternLayout pattern="${filePattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!--
+            Define loggers for packages that we wish to use a different logging level for.
+            This is typically because these packages are noisy and we want to suppress
+            their annoying log messages unless they are really important.
+        -->
+        <Logger name="com.boraydata"     level="info"  />
+
+        <!-- The root logger, the main logging level and which appenders to log to. -->
+        <Root level="all">
+
+            <!-- Let's accept all log messages to start with, then filter them down.
+                 We will accept any message that has the "SECURE" marker on it, or
+                 any log message that meets the minimum log level given in
+                 ${rootLoggingLevel}.
+             -->
+            <Filters>
+                <ThresholdFilter level="${rootLoggingLevel}" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RegistryLogFile"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,61 @@
+server:
+  port: 18082
+  connection-timeout: 18000000
+  servlet:
+    session:
+      timeout: 6000000
+    context-path: /api
+  idle:
+    timeout: 60000000
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 20971520000
+      max-request-size: 209715200
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    dbcp2:
+      validation-query: 'select 1'
+      test-on-borrow: true
+    url: jdbc:mysql://192.168.80.72:3306/fabricflow?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: flowv3
+    password: Data2fabric@flow
+    validationQuery: 'select 1 from dual'
+    testOnBorrow: true
+    testWhileIdle: true
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: mysql
+  kafka:
+    consumer:
+      group-id: test1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap-servers: 192.168.80.71:9092
+  mvc:
+    static-path-pattern: /static/**
+security:
+  mvc-ignored:
+    get: /sms/send/**,/file/**
+    post: /
+    all: /login,/login/registry,/login/authentication,/v2/api-docs,/configuration/ui,/swagger-resources,/configuration/security,/swagger-ui.html,/webjars/**,/swagger-resources/configuration/ui,/swagge‌​r-ui.html,/static,/static/**,/index.html,/index.html/**,/api/**
+    redirect-login-url: /login
+  auth:
+    expire: 60000000
+quartz:
+  enabled: true
