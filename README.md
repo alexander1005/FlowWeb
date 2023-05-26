@@ -24,7 +24,7 @@ Flow是一个拖拽式的流式数据管理平台，可让您轻松收集、处�
 
 ## 主要功能
 
-- 简单的构建-运行流应用程序
+- 构建-运行流应用程序
 
 - 对流数据进行处理和分析
 
@@ -40,7 +40,7 @@ Flow是一个拖拽式的流式数据管理平台，可让您轻松收集、处�
 
 以下是Flow平台的各组件介绍：
 
-1. 数据采集工具：将外部系统的数据采集到Data Fabric Flow平台中，以对数据进行实时的处理和分析。目前支持3种采集工具：
+1. **数据采集工具**：将外部系统的数据采集到Data Fabric Flow平台中，以对数据进行实时的处理和分析。目前支持3种采集工具：
 
    - FlowAgent：将各类的日志文件（tailDir）和xml文件实时地采集并传输到平台中进行处理。目前支持的日志有Syslog，Apache Log，Log4j。
 
@@ -48,11 +48,11 @@ Flow是一个拖拽式的流式数据管理平台，可让您轻松收集、处�
 
    - Flow SDK：如果FlowAgent 和DataFireTool不能满足业务需求，可以使用Flow SDK。Flow SDK支持高度定制化。
 
-2. Flow Gateway：接收实时采集的数据，并保存到平台的FlowStore中
+2. **Flow Gateway**：接收实时采集的数据，并保存到平台的FlowStore中
 
-3. Flow Studio：是一个用于创建、运行和管理数据流应用程序（Flow Application）的用户界面（UI，User Interface）
+3. **Flow Studio**：是一个用于创建、运行和管理数据流应用程序（Flow Application）的用户界面（UI，User Interface）
 
-4. Flow Engine：Flow Engine根据用户在Flow Studio中创建的Flow Application，生成一个可执行的应用程序，实际地对数据进行Flow Application里指定的那些处理和分析，并将处理结果保存到外部存储中
+4. **Flow Engine**：Flow Engine根据用户在Flow Studio中创建的Flow Application，生成一个可执行的应用程序，实际地对数据进行Flow Application里指定的那些处理和分析，并将处理结果保存到外部存储中
 
 ## 功能展示
 
